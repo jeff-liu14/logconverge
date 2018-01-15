@@ -8,7 +8,6 @@ import com.moment.logconverge.delegent.LogApplicationProxy;
 import com.moment.logconverge.type.CacheType;
 import com.moment.logconverge.type.ParseType;
 import com.moment.logconverge.type.PrintType;
-import com.example.net.utils.Constant;
 
 /**
  * Created by moment on 2018/1/10.
@@ -22,7 +21,7 @@ public class MyApplication extends Application {
         LogConverge.Builder builder = new LogConverge
                 .Builder()
                 .setLogLevel(LogConverge.ShowLevel.NONE)
-                .setChannel(Constant.CHANNEL_ID)
+                .setChannel("xiaomi")
                 .setParseType(ParseType.JSON)
                 .setPrintType(PrintType.LOGGCAT)
                 .setCacheType(CacheType.DATABASE);

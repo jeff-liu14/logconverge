@@ -16,8 +16,6 @@ public class PrintLog {
 
     /**
      * 打印日志主方法
-     *
-     * @param log
      */
     public static void print(String log) {
         print(PrintRule.getDefaultRule(), log);
@@ -36,8 +34,6 @@ public class PrintLog {
 
     /**
      * 控制台打印
-     *
-     * @param log
      */
     private static void logcat(final String log) {
         new Thread(new Runnable() {
@@ -51,8 +47,6 @@ public class PrintLog {
 
     /**
      * 吐司打印
-     *
-     * @param log
      */
     private static void toast(final String log) {
         if (LogConverge.application != null) {
