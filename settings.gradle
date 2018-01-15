@@ -1,1 +1,1 @@
-include ':app', ':net', ':logconverge'
+include ':app', ':logconverge'
