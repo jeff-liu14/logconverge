@@ -8,7 +8,7 @@ pack_debug_fun() {
 
 ### 预发布渠道
 pack_uat_fun() {
-    ./gradlew uploadArchives
+    ./gradlew clean build bintrayUpload -PbintrayUser=momentslz -PbintrayKey=b24b935aec050ebd50d7f9b0b5678e0474307d6b -PdryRun=false
 }
 
 ### 正式渠道
