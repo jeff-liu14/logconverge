@@ -2,8 +2,8 @@
 .gradle
 /local.properties
 /.idea
+.release_log.sh
 .DS_Store
 /build
 /captures
 .externalNativeBuild
-.release_log.sh
