@@ -3,7 +3,7 @@
 当前版本功能处于完善阶段业务日志、通用日志、错误日志可以正常使用   
 Action日志当前页面功能有待完善    
 框架功能简介   
-<img src="log.png" width="800px" height="500px"/>
+<img src="log.png" width="900px" height="600px"/>
 # 使用
 在需要使用的module的gradle中添加：
 ```
