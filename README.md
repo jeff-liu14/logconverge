@@ -142,7 +142,7 @@ ACTION日志(ActionLog)
 }
 ```
 
-#Thanks  
+# Thanks  
 JSON解析：[fastjson](https://github.com/alibaba/fastjson)  
 数据库存储：[litepal](https://github.com/LitePalFramework/LitePal)
 
