@@ -1,17 +1,15 @@
-### 日志记录框架
-```
-版本 v1.0.0
-当前版本功能处于完善阶段业务日志、通用日志、错误日志可以正常使用
-Action日志当前页面功能有待完善
-```
-#### 使用
+# 日志记录框架
+版本 v1.0.0   
+当前版本功能处于完善阶段业务日志、通用日志、错误日志可以正常使用   
+Action日志当前页面功能有待完善   
+# 使用
 在需要使用的module的gradle中添加：
 ```
 compile 'com.moment:logconverge:1.0.0'
 ```
-日志框架入口初始化(在Application的onCreate方法中初始化)：
-```
+日志框架入口初始化(在Application的onCreate方法中初始化)：   
 在Application中添加代理：
+```
 LogApplicationProxy.getProxy().onCreate(this);
 LogApplicationProxy.getProxy().onTrimMemory(level);
 LogApplicationProxy.getProxy().onLowMemory();
@@ -47,9 +45,9 @@ LogConverge.Builder builder = new LogConverge
         //日志框架初始化入口
         LogConverge.init(builder, this);
 ```
-Action日志初始化
-```
+Action日志初始化   
 在Fragment(需要日志记录的页面，一般为BaseFragment)中添加代理:
+```
 LogProxy.create().onFragmentHiddenChanged(hidden, this.javaClass.simpleName)
 LogProxy.create().onFragmentResume()
 LogProxy.create().onFragmentPause()
@@ -62,29 +60,52 @@ map.put("业务名称", "业务数据")
 LogConverge.create().log(map)
 ```
 #### 框架详情解析
-业务日志(BusinessLog)
-```
-根据业务需求添日志记录.
-数据结构：Map<String, Object>
+业务日志(BusinessLog)   
+
+根据业务需求添日志记录.   
+数据结构：Map<String, Object>   
 调用方法：LogConverge.log(Map<String, Object> logs)
 ```
-
-通用日志(CommonLog)
+{
+  "businessLog": {
+    "name": "moment",
+    "gender": "male",
+    "age": 17
+  }
+}
 ```
-框架自动记录，日志字段分别为：
-设备厂商(devicebrand)
-系统版本号(sysversion)
-设备唯一标识(uuid)
-应用版本(appversion)
-应用渠道(channel)
+
+通用日志(CommonLog)   
+
+框架自动记录，日志字段分别为：   
+设备厂商(devicebrand)   
+系统版本号(sysversion)   
+设备唯一标识(uuid)   
+应用版本(appversion)   
+应用渠道(channel)   
 最大分配内存(memorysize)
 ```
-
-错误日志(ExceptionLog)
+{
+  "appversion": "1.0.0",
+  "channel": "xiaomi",
+  "deviceBrand": "Xiaomi",
+  "memorysize": "256M",
+  "sysversion": "7.1.1",
+  "uuid": "XXXX-XXXX-XXX-XXX-XXXXXXXX"
+}
 ```
-错误日志分为客户端异常和网络异常
-客户端异常由框架自动记录
-网络异常需用户调用方法LogConverge.logNetError(String log)方法实现
+
+错误日志(ExceptionLog)   
+
+错误日志分为客户端异常和网络异常   
+客户端异常由框架自动记录   
+网络异常需用户调用方法LogConverge.logNetError(String log)方法实现   
+```
+{
+  "error": {
+    "clientError": "Attempt to invoke a virtual method on a null object reference case:java.lang.NullPointerException: Attempt to invoke a virtual method on a null object reference"
+  }
+}
 ```
 
 ACTION日志(ActionLog)
@@ -95,6 +116,13 @@ ACTION日志(ActionLog)
 进入时间(enterTime)
 退出时间(exitTime)
 前一页面停留时间(spendTime)
+{
+  "currentPage": "TestActivity",
+  "enterTime": 1516076541468,
+  "exitTime": 1516076630131,
+  "previousPage": "MainActivity_MainFragment",
+  "spendTime": "0h1m28s"
+}
 ```
 
 
@@ -113,7 +141,12 @@ ACTION日志(ActionLog)
     *;
 }
 ```
-#### License
+
+#Thanks  
+JSON解析：[fastjson](https://github.com/alibaba/fastjson)  
+数据库存储：[litepal](https://github.com/LitePalFramework/LitePal)
+
+# License
 ```
 Copyright 2018 momentslz
 

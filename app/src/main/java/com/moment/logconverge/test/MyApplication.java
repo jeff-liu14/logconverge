@@ -20,7 +20,7 @@ public class MyApplication extends Application {
         super.onCreate();
         LogConverge.Builder builder = new LogConverge
                 .Builder()
-                .setLogLevel(LogConverge.ShowLevel.NONE)
+                .setLogLevel(LogConverge.ShowLevel.ALL)
                 .setChannel("xiaomi")
                 .setParseType(ParseType.JSON)
                 .setPrintType(PrintType.LOGGCAT)

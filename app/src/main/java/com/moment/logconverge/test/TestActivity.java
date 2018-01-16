@@ -3,6 +3,7 @@ package com.moment.logconverge.test;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moment.logconverge.LogConverge;
@@ -33,11 +34,13 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 count++;
-                Map<String, Object> hashMap = new HashMap<String, Object>();
-                hashMap.put("name", "moment");
-                hashMap.put("age", 17);
-                hashMap.put("gender", "male");
-                LogConverge.create().log(hashMap);
+//                Map<String, Object> hashMap = new HashMap<String, Object>();
+//                hashMap.put("name", "moment");
+//                hashMap.put("age", 17);
+//                hashMap.put("gender", "male");
+//                LogConverge.create().log(hashMap);
+                TextView textView = null;
+                textView.setText(null);
             }
         });
 
