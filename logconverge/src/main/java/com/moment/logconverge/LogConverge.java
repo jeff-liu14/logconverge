@@ -206,8 +206,8 @@ public class LogConverge {
             LogProxy.create()
                     .registerActivityLifecycleCallbacks(application)
                     .initCommonLog(application, channel)
-                    .setLogLevelTypes(logLevelTypes)
-                    .registerUnCatchException();
+                    .setLogLevelTypes(logLevelTypes);
+//                    .registerUnCatchException();
             PrintRule.setDefaultRule(printType);
             CacheRule.setDefaultRule(cacheType);
             ParseRule.setDefaultRule(parseType);
