@@ -132,7 +132,8 @@ ACTION日志(ActionLog)
 
 示例：
 
-<img height=500 width=500 src="https://github.com/momentslz/logconverge/blob/master/download.gif">
+<img height=1080 width=720 src="https://github.com/momentslz/logconverge/blob/master/download.gif">
+
 
 |- 在Manifest中进行Service注册
 
