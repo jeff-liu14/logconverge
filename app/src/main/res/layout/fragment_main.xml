@@ -24,4 +24,13 @@
         android:padding="10dp"
         android:text="delete" />
 
+    <TextView
+        android:id="@+id/tv_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="download_apk" />
+
 </LinearLayout>

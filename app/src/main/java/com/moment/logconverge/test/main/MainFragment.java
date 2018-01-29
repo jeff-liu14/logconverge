@@ -10,10 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moment.logconverge.LogConverge;
+import com.moment.logconverge.download.FileDownloaderManager;
 import com.moment.logconverge.test.TestActivity;
 import com.moment.logconverge.test.R;
 import com.moment.logconverge.test.base.BaseFragment;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -23,7 +25,8 @@ import java.util.List;
 public class MainFragment extends BaseFragment implements MainContract.MainView {
 
     MainContract.MainPresenter presenter;
-    TextView textView, delete;
+    TextView textView, delete, tv_download;
+    private static final String url = "";
 
     @Nullable
     @Override
@@ -49,7 +52,55 @@ public class MainFragment extends BaseFragment implements MainContract.MainView 
                 LogConverge.create().clearAllLog();
             }
         });
+
+        tv_download = view.findViewById(R.id.tv_download);
+
+        FileDownloaderManager.init(getActivity());
+        try {
+            FileDownloaderManager.registerDownload(new FileDownloaderManager.DownloadCallback() {
+                @Override
+                public void onPrepare() {
+
+                }
+
+                @Override
+                public void onProgress(int progress) {
+
+                }
+
+                @Override
+                public void onComplete(File file) {
+
+                }
+
+                @Override
+                public void onFail(String msg) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tv_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    FileDownloaderManager.download(url);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        FileDownloaderManager.unbinder();
     }
 
     @Override

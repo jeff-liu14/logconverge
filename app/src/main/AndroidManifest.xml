@@ -33,6 +33,8 @@
         </activity>
 
         <activity android:name="com.moment.logconverge.test.TestActivity" />
+
+        <service android:name="com.moment.logconverge.download.DownloadService" />
     </application>
 
 </manifest>
