@@ -130,6 +130,10 @@ ACTION日志(ActionLog)
 
 新加apk下载管理类
 
+示例：
+
+<iframe height=500 width=500 src="download.gif">
+
 |- 在Manifest中进行Service注册
 
 ```
