@@ -4,7 +4,7 @@
 待完善：Action日志当前页面功能、本地存储的上传规则          
 
 框架功能简介   
-<img src="log.png" width="900px" height="600px"/>
+<img src="https://github.com/momentslz/logconverge/blob/master/log.png" width="900px" height="600px"/>
 # 使用
 在需要使用的module的gradle中添加：
 ```
