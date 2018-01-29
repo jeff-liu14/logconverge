@@ -128,6 +128,47 @@ ACTION日志(ActionLog)
 }
 ```
 
+新加apk下载管理类
+
+|- 在Manifest中进行Service注册
+
+```
+<service android:name="com.moment.logconverge.download.DownloadService" />
+```
+|- 初始化及注册进度回调
+
+```
+//初始化文件下载管理类
+FileDownloaderManager.init(context)
+// 注册下载进度监听，并开启广播接收
+FileDownloaderManager.registerDownload(object : FileDownloaderManager.DownloadCallback {
+            override fun onComplete(file: File) = mainView.downloadSucc(file)
+
+            override fun onFail(msg: String?) = Unit
+
+            override fun onProgress(progress: Int) = mainView.onProgress(progress)
+
+            override fun onPrepare() = Unit
+
+        })
+```
+|- 开启下载
+
+```
+FileDownloaderManager.download(url)
+```
+|- 在下载完成后进行资源重置
+
+```
+FileDownloaderManager.unbinder()
+```
+
+apk下载混淆添加
+```
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+```
 
 混淆如下
 

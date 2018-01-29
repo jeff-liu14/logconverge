@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.Locale;
@@ -45,12 +47,10 @@ public class DownloadService extends IntentService {
 
     //定义notify的id，避免与其它的notification的处理冲突
     private static final int NOTIFY_ID = 0;
-    private static final String CHANNEL = "update";
 
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder mBuilder;
     private Notification.Builder _mBuilder;
-    //    private DownloadCallback callback;
     private LocalBroadcastManager mLocalBroadcastManager;
     //定义个更新速率，避免更新通知栏过于频繁导致卡顿
     private float rate = .0f;
@@ -119,6 +119,7 @@ public class DownloadService extends IntentService {
                 notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                 _mBuilder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
                 _mBuilder.setContentTitle("开始下载")
+                        .setSmallIcon(getNotifyId())
                         .setContentText("更新中...")
                         .setOngoing(true)
                         .setAutoCancel(true)
@@ -128,6 +129,8 @@ public class DownloadService extends IntentService {
                 mBuilder = new NotificationCompat.Builder(this);
                 mBuilder.setContentTitle("开始下载")
                         .setContentText("更新中...")
+                        .setSmallIcon(getNotifyId())
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), getNotifyId()))
                         .setOngoing(true)
                         .setAutoCancel(true)
                         .setWhen(System.currentTimeMillis());
@@ -141,6 +144,13 @@ public class DownloadService extends IntentService {
         } else {
             mNotificationManager.notify(NOTIFY_ID, mBuilder.build());
         }
+    }
+
+    private int getNotifyId() {
+        Resources res = getResources();
+        final String packageName = getPackageName();
+        int imageResId = res.getIdentifier("ic_launcher", "mipmap", packageName);
+        return imageResId;
     }
 
     /**
@@ -241,36 +251,40 @@ public class DownloadService extends IntentService {
     }
 
     private void notifyInstall(File file) {
-        if (onFront()) {
-            Intent intent = installIntent(file);
-            startActivity(intent);
-        } else {
-            if (android.os.Build.VERSION.SDK_INT >= 26) {
-                Intent intent = installIntent(file.getAbsoluteFile());
-                PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext()
-                        , 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                _mBuilder.setContentIntent(pIntent)
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText("下载完成，点击安装")
-                        .setProgress(0, 0, false)
-                        .setDefaults(Notification.DEFAULT_ALL);
-                Notification notification = _mBuilder.build();
-                notification.flags = Notification.FLAG_AUTO_CANCEL;
-                mNotificationManager.notify(NOTIFY_ID, notification);
+        String fileName = file.getName();
+        String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
+        if ("apk".equals(prefix)) {
+            if (onFront()) {
+                Intent intent = installIntent(file);
+                startActivity(intent);
             } else {
-                Intent intent = installIntent(file.getAbsoluteFile());
-                PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext()
-                        , 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                mBuilder.setContentIntent(pIntent)
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentText("下载完成，点击安装")
-                        .setProgress(0, 0, false)
-                        .setDefaults(Notification.DEFAULT_ALL);
-                Notification notification = mBuilder.build();
-                notification.flags = Notification.FLAG_AUTO_CANCEL;
-                mNotificationManager.notify(NOTIFY_ID, notification);
-            }
+                if (android.os.Build.VERSION.SDK_INT >= 26) {
+                    Intent intent = installIntent(file.getAbsoluteFile());
+                    PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext()
+                            , 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    _mBuilder.setContentIntent(pIntent)
+                            .setContentTitle(getString(R.string.app_name))
+                            .setContentText("下载完成，点击安装")
+                            .setProgress(0, 0, false)
+                            .setDefaults(Notification.DEFAULT_ALL);
+                    Notification notification = _mBuilder.build();
+                    notification.flags = Notification.FLAG_AUTO_CANCEL;
+                    mNotificationManager.notify(NOTIFY_ID, notification);
+                } else {
+                    Intent intent = installIntent(file.getAbsoluteFile());
+                    PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext()
+                            , 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    mBuilder.setContentIntent(pIntent)
+                            .setContentTitle(getString(R.string.app_name))
+                            .setContentText("下载完成，点击安装")
+                            .setProgress(0, 0, false)
+                            .setDefaults(Notification.DEFAULT_ALL);
+                    Notification notification = mBuilder.build();
+                    notification.flags = Notification.FLAG_AUTO_CANCEL;
+                    mNotificationManager.notify(NOTIFY_ID, notification);
+                }
 
+            }
         }
     }
 

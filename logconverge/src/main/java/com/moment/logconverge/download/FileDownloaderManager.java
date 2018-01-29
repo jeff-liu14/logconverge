@@ -19,8 +19,6 @@ public class FileDownloaderManager {
     private static MyBroadcastReceiver mBroadcastReceiver;
     private static DownloadCallback downloadCallback;
     private static Context mContext;
-    //    public final static String ACTION_TYPE_SERVICE = "action.type.service";
-//    public final static String ACTION_TYPE_THREAD = "action.type.thread";
     public final static String ACTION_TYPE_PREPARE = "action.type.prepare";
     public final static String ACTION_TYPE_PROGRESS = "action.type.progress";
     public final static String ACTION_TYPE_COMPLETE = "action.type.complete";
@@ -80,7 +78,7 @@ public class FileDownloaderManager {
                     break;
                 case ACTION_TYPE_PROGRESS:
                     int progress = intent.getIntExtra("progress", 0);
-                    Log.d("progress", "|- " + progress + " -|");
+//                    Log.d("progress", "|- " + progress + " -|");
                     if (downloadCallback != null) {
                         downloadCallback.onProgress(progress);
                     }
