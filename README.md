@@ -140,6 +140,49 @@ ACTION日志(ActionLog)
 ```
 <service android:name="com.moment.logconverge.download.DownloadService" />
 ```
+
+|- 注册fileProvider
+
+```
+<provider
+    android:name="android.support.v4.content.FileProvider"
+    android:authorities="${applicationId}.provider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
+```
+在app-src-main-res目录下创建xml文件夹并添加file_paths.xml文件
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <root-path
+        name="root"
+        path="" />
+    <files-path
+        name="files"
+        path="" />
+
+    <cache-path
+        name="cache"
+        path="" />
+
+    <external-path
+        name="external"
+        path="" />
+
+    <external-files-path
+        name="external_file_path"
+        path="" />
+    <external-cache-path
+        name="external_cache_path"
+        path="" />
+</paths>
+```
+
 |- 初始化及注册进度回调
 
 ```
