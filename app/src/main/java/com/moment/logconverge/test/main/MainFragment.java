@@ -26,7 +26,7 @@ public class MainFragment extends BaseFragment implements MainContract.MainView 
 
     MainContract.MainPresenter presenter;
     TextView textView, delete, tv_download;
-    private static final String url = "";
+    private static final String url = "http://p1ptub1ir.bkt.clouddn.com/app-xiaomi-release-v1.0-1.apk";
 
     @Nullable
     @Override
