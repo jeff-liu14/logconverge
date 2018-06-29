@@ -1,6 +1,5 @@
 package com.moment.logconverge.entity;
 
-import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 /**

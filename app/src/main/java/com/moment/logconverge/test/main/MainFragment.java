@@ -36,12 +36,14 @@ public class MainFragment extends BaseFragment implements MainContract.MainView 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<String> list = LogConverge.create().getAllLogs();
-                if (list != null && list.size() > 0) {
-                    Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();
-                }
-                Intent intent = new Intent(getActivity(), TestActivity.class);
-                startActivity(intent);
+//                List<String> list = LogConverge.create().getAllLogs();
+//                if (list != null && list.size() > 0) {
+//                    Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();
+//                }
+//                Intent intent = new Intent(getActivity(), TestActivity.class);
+//                startActivity(intent);
+
+                startActivity(new Intent(getActivity(), com.moment.adlib.TestActivity.class));
 
             }
         });

@@ -64,7 +64,14 @@ public class FileDownloaderManager {
     }
 
     public static void unbinder() {
-        mLocalBroadcastManager.unregisterReceiver(mBroadcastReceiver);
+        if (mLocalBroadcastManager != null) {
+            mLocalBroadcastManager.unregisterReceiver(mBroadcastReceiver);
+        }
+
+        mBroadcastReceiver = null;
+        mLocalBroadcastManager = null;
+        downloadCallback = null;
+        mContext = null;
     }
 
     public static class MyBroadcastReceiver extends BroadcastReceiver {

@@ -49,7 +49,7 @@ publish {
     userOrg = 'zhengliu'//bintray.com用户名
     groupId = 'com.moment'//jcenter上的路径
     artifactId = 'logconverge'//项目名称
-    publishVersion = '1.0.3-2'//版本号
+    publishVersion = '1.0.4'//版本号
     desc = 'Android日志打点框架'//描述，不重要
     website = 'https://github.com/momentslz/logconverge'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

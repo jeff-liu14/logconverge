@@ -8,7 +8,7 @@
 # 使用
 在需要使用的module的gradle中添加：
 ```
-compile 'com.moment:logconverge:1.0.3-2'
+compile 'com.moment:logconverge:1.0.4'
 ```
 日志框架入口初始化(在Application的onCreate方法中初始化)：   
 在Application中添加代理：
